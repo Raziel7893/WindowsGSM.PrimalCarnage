@@ -61,9 +61,8 @@ namespace WindowsGSM.Plugins
             if (await DownloadGameServerConfig(configPath, configPath))
             {
                 string configText = File.ReadAllText(configPath);
-                configText = configText.Replace("{{session_name}}", _serverData.ServerName);
+                configText = configText.Replace("{{ServerName}}", _serverData.ServerName);
                 configText = configText.Replace("{{rcon_port}}", _serverData.ServerQueryPort);
-                configText = configText.Replace("{{max_players}}", _serverData.ServerMaxPlayer);
                 File.WriteAllText(configPath, configText);
             }
         }
@@ -72,7 +71,7 @@ namespace WindowsGSM.Plugins
         public async Task<Process> Start()
         {
             // Check for files in Win64
-            string win64 = Path.Combine(ServerPath.GetServersServerFiles(_serverData.ServerID, @"TheIsle\Binaries\Win64\"));
+            string win64 = Path.Combine(ServerPath.GetServersServerFiles(_serverData.ServerID, @"Binaries\Win64\"));
             string[] neededFiles = { "steamclient64.dll", "tier0_s64.dll", "vstdlib_s64.dll" };
 
             foreach (string file in neededFiles)
