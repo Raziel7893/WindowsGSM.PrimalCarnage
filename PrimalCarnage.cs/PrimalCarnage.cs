@@ -10,7 +10,7 @@ using System.Net;
 
 namespace WindowsGSM.Plugins
 {
-    public class TheIsle : SteamCMDAgent
+    public class PrimalCarnage : SteamCMDAgent
     {
         // - Plugin Details
         public Plugin Plugin = new Plugin
@@ -28,7 +28,7 @@ namespace WindowsGSM.Plugins
         public override string AppId => "336400"; // Game server appId
 
         // - Standard Constructor and properties
-        public TheIsle(ServerConfig serverData) : base(serverData) => base.serverData = _serverData = serverData;
+        public PrimalCarnage(ServerConfig serverData) : base(serverData) => base.serverData = _serverData = serverData;
         private readonly ServerConfig _serverData;
         public string Error, Notice;
 
