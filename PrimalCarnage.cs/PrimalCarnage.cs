@@ -16,7 +16,7 @@ namespace WindowsGSM.Plugins
         public Plugin Plugin = new Plugin
         {
             name = "WindowsGSM.PrimalCarnage", // WindowsGSM.XXXX
-            author = "MaltronCraft",
+            author = "Raziel7893",
             description = "WindowsGSM plugin for supporting Primal Carnage: Extinction Dedicated Server",
             version = "1.0",
             url = "https://github.com/MaltronCraft/WindowsGSM.PrimalCarnage", // Github repository link (Best practice)
@@ -25,13 +25,11 @@ namespace WindowsGSM.Plugins
 
         // - Settings properties for SteamCMD installer
         public override bool loginAnonymous => true;
-        public override string AppId => "336400"; // Game server appId
+        public override string AppId => "224620"; // Game server appId
 
         // - Standard Constructor and properties
         public PrimalCarnage(ServerConfig serverData) : base(serverData) => base.serverData = _serverData = serverData;
         private readonly ServerConfig _serverData;
-        public string Error, Notice;
-
 
         // - Game server Fixed variables
         public override string StartPath => @"Binaries\Win64\PrimalCarnageServer.exe"; // Game server start path
@@ -179,7 +177,7 @@ namespace WindowsGSM.Plugins
             {
                 using (WebClient webClient = new WebClient())
                 {
-                    await webClient.DownloadFileTaskAsync($"https://raw.githubusercontent.com/MaltronCraft/Configs/PCServer-PrimalCarnageGame.ini", filePath);
+                    await webClient.DownloadFileTaskAsync($"https://raw.githubusercontent.com/Raziel7893/WindowsGSM.PrimalCarnage/main/Configs/PCServer-PrimalCarnageGame.ini", filePath);
                 }
             }
             catch (Exception e)
