@@ -44,7 +44,7 @@ namespace WindowsGSM.Plugins
         public string Defaultmap = "PC-Docks";
         public string QueryPort = "27015"; // Default query port
         public string Maxplayers = "75"; // Default maxplayers
-        public string Additional = ""; // Additional server start parameter
+        public string Additional = "?steamsockets"; // Additional server start parameter
 
 
         // - Create a default cfg for the game server after installation
@@ -83,11 +83,11 @@ namespace WindowsGSM.Plugins
             string shipExePath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath);
 
             // Prepare start parameter
-            string param = string.IsNullOrWhiteSpace(_serverData.ServerMap) ? string.Empty : $"{_serverData.ServerMap}";
-            param += string.IsNullOrWhiteSpace(_serverData.ServerPort) ? string.Empty : $"?MultiHome={_serverData.ServerIP}";
+            string param = string.IsNullOrWhiteSpace(_serverData.ServerMap) ? string.Empty : $"{_serverData.ServerMap}?game=primalcarnagegame.pcfreeroamgame?steamsockets";
             param += string.IsNullOrWhiteSpace(_serverData.ServerPort) ? string.Empty : $"?Port={_serverData.ServerPort}";
 			param += string.IsNullOrWhiteSpace(_serverData.ServerPort) ? string.Empty : $"?QueryPort={_serverData.ServerQueryPort}";
-            param += $"?{_serverData.ServerParam}?";
+            param += $"{_serverData.ServerParam}";
+            param += $" -seekfreeloadingserver";
 
             // Prepare Process
             var p = new Process
@@ -97,7 +97,8 @@ namespace WindowsGSM.Plugins
                     WorkingDirectory = ServerPath.GetServersServerFiles(_serverData.ServerID),
                     FileName = shipExePath,
                     Arguments = param,
-                    WindowStyle = ProcessWindowStyle.Minimized,
+                    WindowStyle = ProcessWindowStyle.Normal,
+                    CreateNoWindow = false,
                     UseShellExecute = false
                 },
                 EnableRaisingEvents = true
@@ -107,6 +108,8 @@ namespace WindowsGSM.Plugins
             if (AllowsEmbedConsole)
             {
                 p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
                 p.StartInfo.RedirectStandardInput = true;
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.RedirectStandardError = true;
@@ -114,26 +117,17 @@ namespace WindowsGSM.Plugins
                 p.OutputDataReceived += serverConsole.AddOutput;
                 p.ErrorDataReceived += serverConsole.AddOutput;
 
-                // Start Process
-                try
-                {
-                    p.Start();
-                }
-                catch (Exception e)
-                {
-                    Error = e.Message;
-                    return null; // return null if fail to start
-                }
-
-                p.BeginOutputReadLine();
-                p.BeginErrorReadLine();
-                return p;
             }
-
-            // Start Process
+                // Start Process
             try
             {
                 p.Start();
+                if (AllowsEmbedConsole)
+                {
+                    p.BeginOutputReadLine();
+                    p.BeginErrorReadLine();
+                }
+
                 return p;
             }
             catch (Exception e)

@@ -14,8 +14,22 @@
     1. Press on the Puzzle Icon in the left bottom side and press **[RELOAD PLUGINS]** or restart WindowsGSM
 3. Or Press on the Puzzle Icon in the left bottom side and press **[IMPORT PLUGIN]** and choose the downloaded .zip
 
+### Available options:
+- ?AdminPassword=Password
+- ?GamePassword=password
+- ?RoundTimeLimit=0
+- ?MatchScoreTarget=0
+- ?bEnableDamage=0
+- ?bEnableKilling=0
+- ?bEnableKilling=True (Enables Killing)
+- ?bEnableDamage=True (Enables Damage)
+- ?bDisableKilling=True (Disables Killing)
+- ?bDisableDamage=True (Disables Damage)
+- ?BalanceTeams=True (Enables Team balance... which will also include auto balance)
+- ?BalanceTeams=False (Gets rid of the team balance issues)
+
 ### Official Documentation
-🗃️ Didn't find any documentation yet. Please Let me know if you came accros one
+🗃️ more or less official, but it helped creating the CMD-Line https://steamcommunity.com/app/321360/discussions/1/494631967655276683/
 
 ### The Game
 🕹️ https://store.steampowered.com/app/321360/Primal_Carnage_Extinction/
