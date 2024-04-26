@@ -25,7 +25,7 @@ namespace WindowsGSM.Plugins
 
         // - Settings properties for SteamCMD installer
         public override bool loginAnonymous => true;
-        public override string AppId => "224620"; // Game server appId
+        public override string AppId => "336400"; // Game server appId
 
         // - Standard Constructor and properties
         public PrimalCarnage(ServerConfig serverData) : base(serverData) => base.serverData = _serverData = serverData;
@@ -41,7 +41,7 @@ namespace WindowsGSM.Plugins
 
         // - Game server default values
         public string Port = "7777"; // Default port
-        public string ServerMap = "PC-Docks";
+        public string Defaultmap = "PC-Docks";
         public string QueryPort = "27015"; // Default query port
         public string Maxplayers = "75"; // Default maxplayers
         public string Additional = ""; // Additional server start parameter
