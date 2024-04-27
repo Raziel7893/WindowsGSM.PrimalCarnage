@@ -41,10 +41,10 @@ namespace WindowsGSM.Plugins
 
         // - Game server default values
         public string Port = "7777"; // Default port
-        public string Defaultmap = "PC-Docks?game=PrimalCarnageGame.PCTeamDeathMatchGame";
+        public string Defaultmap = "PC-Docks";
         public string QueryPort = "27015"; // Default query port
         public string Maxplayers = "75"; // Default maxplayers
-        public string Additional = "?RoundTimeLimit=1200?RoundScoreTarget=150?AdminPassword=Password?bIsDedicated=true"; // Additional server start parameter
+        public string Additional = "?game=PrimalCarnageGame.PCTeamDeathMatchGamesdoe?MaxSpectators=5?RoundTimeLimit=1200?RoundScoreTarget=150?AdminPassword=Password?bIsDedicated=true"; // Additional server start parameter
 
 
         // - Create a default cfg for the game server after installation
@@ -107,7 +107,7 @@ namespace WindowsGSM.Plugins
             };
 
             // Set up Redirect Input and Output to WindowsGSM Console if EmbedConsole is on
-            if (AllowsEmbedConsole)
+            if (_serverData.EmbedConsole)
             {
                 p.StartInfo.CreateNoWindow = true;
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -118,13 +118,12 @@ namespace WindowsGSM.Plugins
                 var serverConsole = new ServerConsole(_serverData.ServerID);
                 p.OutputDataReceived += serverConsole.AddOutput;
                 p.ErrorDataReceived += serverConsole.AddOutput;
-
             }
                 // Start Process
             try
             {
                 p.Start();
-                if (AllowsEmbedConsole)
+                if (_serverData.EmbedConsole)
                 {
                     p.BeginOutputReadLine();
                     p.BeginErrorReadLine();
