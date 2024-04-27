@@ -44,7 +44,7 @@ namespace WindowsGSM.Plugins
         public string Defaultmap = "PC-Docks";
         public string QueryPort = "27015"; // Default query port
         public string Maxplayers = "75"; // Default maxplayers
-        public string Additional = "?steamsockets"; // Additional server start parameter
+        public string Additional = "?bIsDedicated=true?steamsockets"; // Additional server start parameter
 
 
         // - Create a default cfg for the game server after installation
@@ -83,11 +83,12 @@ namespace WindowsGSM.Plugins
             string shipExePath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath);
 
             // Prepare start parameter
-            string param = string.IsNullOrWhiteSpace(_serverData.ServerMap) ? string.Empty : $"{_serverData.ServerMap}?game=primalcarnagegame.pcfreeroamgame?steamsockets";
+            string param = string.IsNullOrWhiteSpace(_serverData.ServerMap) ? string.Empty : $"{_serverData.ServerMap}?game=primalcarnagegame.pcfreeroamgame";
             param += string.IsNullOrWhiteSpace(_serverData.ServerPort) ? string.Empty : $"?Port={_serverData.ServerPort}";
-			param += string.IsNullOrWhiteSpace(_serverData.ServerPort) ? string.Empty : $"?QueryPort={_serverData.ServerQueryPort}";
+            param += string.IsNullOrWhiteSpace(_serverData.ServerQueryPort) ? string.Empty : $"?QueryPort={_serverData.ServerQueryPort}";
+            param += string.IsNullOrWhiteSpace(_serverData.ServerQueryPort) ? string.Empty : $"?MaxPlayers={_serverData.ServerMaxPlayer}";
             param += $"{_serverData.ServerParam}";
-            param += $" -seekfreeloadingserver";
+            param += $"?MultiHome={_serverData.ServerIP} -seekfreeloadingserver";
 
             // Prepare Process
             var p = new Process
