@@ -35,13 +35,13 @@ namespace WindowsGSM.Plugins
         public override string StartPath => @"Binaries\Win64\PrimalCarnageServer.exe"; // Game server start path
         public string FullName = "Primal Carnage: Extinction Dedicated Server"; // Game server FullName
         public bool AllowsEmbedConsole = true;  // Does this server support output redirect?
-        public int PortIncrements = 1; // This tells WindowsGSM how many ports should skip after installation
+        public int PortIncrements = 2; // This tells WindowsGSM how many ports should skip after installation
         public object QueryMethod = new A2S(); // Query method should be use on current server type. Accepted value: null or new A2S() or new FIVEM() or new UT3()
 
 
         // - Game server default values
         public string Port = "7777"; // Default port
-        public string Defaultmap = "PC-Docks";
+        public string Defaultmap = "PC-Docks?game=primalcarnagegame.pcfreeroamgame";
         public string QueryPort = "27015"; // Default query port
         public string Maxplayers = "75"; // Default maxplayers
         public string Additional = "?bIsDedicated=true?steamsockets"; // Additional server start parameter
@@ -83,8 +83,9 @@ namespace WindowsGSM.Plugins
             string shipExePath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath);
 
             // Prepare start parameter
-            string param = string.IsNullOrWhiteSpace(_serverData.ServerMap) ? string.Empty : $"{_serverData.ServerMap}?game=primalcarnagegame.pcfreeroamgame";
+            string param = string.IsNullOrWhiteSpace(_serverData.ServerMap) ? string.Empty : $"{_serverData.ServerMap}";
             param += string.IsNullOrWhiteSpace(_serverData.ServerPort) ? string.Empty : $"?Port={_serverData.ServerPort}";
+            param += string.IsNullOrWhiteSpace(_serverData.ServerPort) ? string.Empty : $"?PeerPort={int.Parse(_serverData.ServerPort)+1}";
             param += string.IsNullOrWhiteSpace(_serverData.ServerQueryPort) ? string.Empty : $"?QueryPort={_serverData.ServerQueryPort}";
             param += string.IsNullOrWhiteSpace(_serverData.ServerQueryPort) ? string.Empty : $"?MaxPlayers={_serverData.ServerMaxPlayer}";
             param += $"{_serverData.ServerParam}";
