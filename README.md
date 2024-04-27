@@ -3,6 +3,10 @@
 
 ## PLEASE ⭐STAR⭐ THE REPO IF YOU LIKE IT! THANKS!
 
+### Important to Note:
+- Unfortunatly the consoleoutput is broken right now, no idea why
+- Somehow it either opens, nor passes the text to WindowsGSM besides some warnings
+
 ### WindowsGSM Installation: 
 1. Download  WindowsGSM https://windowsgsm.com/ 
 2. Create a Folder at a Location you wan't all Server to be Installed and Run.
