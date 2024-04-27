@@ -41,10 +41,10 @@ namespace WindowsGSM.Plugins
 
         // - Game server default values
         public string Port = "7777"; // Default port
-        public string Defaultmap = "PC-Docks?game=primalcarnagegame.pcfreeroamgame";
+        public string Defaultmap = "PC-Docks?game=PrimalCarnageGame.PCTeamDeathMatchGame";
         public string QueryPort = "27015"; // Default query port
         public string Maxplayers = "75"; // Default maxplayers
-        public string Additional = "?bIsDedicated=true?steamsockets"; // Additional server start parameter
+        public string Additional = "?RoundTimeLimit=1200?RoundScoreTarget=150?AdminPassword=Password?bIsDedicated=true"; // Additional server start parameter
 
 
         // - Create a default cfg for the game server after installation
@@ -89,7 +89,7 @@ namespace WindowsGSM.Plugins
             param += string.IsNullOrWhiteSpace(_serverData.ServerQueryPort) ? string.Empty : $"?QueryPort={_serverData.ServerQueryPort}";
             param += string.IsNullOrWhiteSpace(_serverData.ServerQueryPort) ? string.Empty : $"?MaxPlayers={_serverData.ServerMaxPlayer}";
             param += $"{_serverData.ServerParam}";
-            param += $"?MultiHome={_serverData.ServerIP} -seekfreeloadingserver";
+            param += $" -seekfreeloadingserver";
 
             // Prepare Process
             var p = new Process
